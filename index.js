@@ -1,9 +1,27 @@
-var http = require("http");
+import express from 'express';
+import axios from 'axios';
 
-//create a server object:
-http
-  .createServer(function (req, res) {
-    res.write("Hello from CodeSandbox!"); //write a response to the client
-    res.end(); //end the response
-  })
-  .listen(8080); //the server object listens on port 8080
+const app = express();
+
+const port = 3000;
+
+app.use(express.static('public'));
+
+app.get('/', async(req, res) => {
+  try {
+    const result = await axios.get('https://secrets-api.appbrewery.com/random');
+    res.render('index.ejs', {
+      secret: result.data.secret,
+      user: result.data.username,
+    });
+
+  } catch(error) {
+    console.log(error.response.data);
+    res.status(500);
+
+  }
+});
+
+app.listen(port, () => {
+  console.log(`server in ${port}`)
+})

@@ -4,6 +4,7 @@
   "description": "Node.js example server starter project",
   "license": "MIT",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js"
   },
@@ -13,5 +14,9 @@
     "@types/node": "^20.5.9",
     "nodemon": "^3.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "1.6.0",
+    "ejs": "3.1.9",
+    "express": "4.18.2"
+  }
 }
